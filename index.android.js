@@ -1,33 +1,6 @@
 'use strict';
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 
-class TableTopHuD extends Component {
+import React, { AppRegistry } from 'react-native';
+import App from './app/containers/app'
 
- render() {
-    return (
-        <View style={styles.container}>
-          <Text>
-            Android Dev
-          </Text>
-        </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-
-});
-
-
-AppRegistry.registerComponent('TableTopHuD', () => TableTopHuD);
+AppRegistry.registerComponent('TableTopHuD', () => App);

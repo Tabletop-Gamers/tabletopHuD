@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "clean": "rm -rf node_modules/react-native/node_modules/react; rm -rf node_modules/react-native/node_modules/fbjs; rm -rf node_modules/react/node_modules/fbjs",
+    "test": "jest --verbose"
   },
   "dependencies": {
     "react-native": "^0.19.0",
@@ -12,6 +14,6 @@
     "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
-    "jest": "^0.1.40"
+    "jest-cli": "^0.8.2"
   }
 }
