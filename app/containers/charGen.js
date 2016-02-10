@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import NavBar from '../components/navbar'
 import BottomBar from '../components/CharGen/bottombar'
 import ClassList from '../components/CharGen/classList'
+import RaceList from '../components/CharGen/raceList'
 
 class CharGen extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class CharGen extends Component {
         <View style={styles.header}>
           <NavBar />
         </View>
-        <ClassList />
+        <RaceList />
         <BottomBar />
       </View>
       )

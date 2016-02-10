@@ -5,7 +5,7 @@ import React, { Component, View, Text, StyleSheet } from 'react-native'
 export default class BottomBar extends Component {
   render() {
     let selected = ['Str', 'Con']
-    let racial = [{name: 'Str', mod: 3}, {name:'Dex', mod: -2}]
+    let racial = [{name: 'Con', mod: 3}, {name:'Dex', mod: -2}]
     let attributes = ['Str', 'Dex', 'Con', 'Wis', 'Int', 'Cha']
     let index = 1
     return (
@@ -84,7 +84,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'green'
   },
   atrText: {
-    margin: 5,
+    margin: 4,
     textAlign: 'center',
     backgroundColor: '#747274',
     color: "#b6b6b6",
@@ -94,7 +94,7 @@ let styles = StyleSheet.create({
   selectText: {
     width: 50,
     height: 20,
-    margin: 5,
+    margin: 4,
     textAlign: 'center',
     backgroundColor: '#b6b6b6',
     color: "#747274",

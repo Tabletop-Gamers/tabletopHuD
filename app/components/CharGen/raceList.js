@@ -2,20 +2,20 @@
 
 import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native'
 
-export default class ClassList extends Component {
+export default class RaceList extends Component {
 
   _selectRow(cls) {
     this.selected = cls
   }
 
   _renderRow(row) {
-    let selected = 'Ranger'
+    let selected = 'Human'
     if (row.name ===  selected) {
       row = (<View style={styles.selectedRow}>
               <Text style={styles.rows}>{row.name}</Text>
               <Text style={styles.selectedText}>{row.description}</Text>
-              <Text>Roles: {row.role}</Text>
-              <Text>Primary Stat: {row.keyatr}</Text>
+              <Text>Racial Bonus: {row.bonus}</Text>
+              <Text>Languages Known: {row.languages}</Text>
             </View>
             )
     } else {
@@ -37,19 +37,12 @@ export default class ClassList extends Component {
   }
   render() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let classes = [{name: 'Fighter', description: "I FIGHT SHIT", keyatr: "Str"}, 
-          {name: 'Ranger', description: "A ranger often accepts the role of protector, aiding those who live in or travel through the woods. In addition, a ranger carries grudges against certain types of creatures and looks for opportunities to find and destroy them. He may adventure for all the reasons that a fighter does.", role:"Ranged or Melee Combat", keyatr: "Dex"},
-          {name: 'Cleric', description: "I shoot shit", keyatr: "Wis"},
-          {name: 'Rogue', description: "I shoot shit", keyatr: "Dex"},
-          {name: 'Wizard', description: "I shoot shit", keyatr: "Int"},
-          {name: 'Sorcerer', description: "I shoot shit", keyatr: "Int"},
-          {name: 'Monk', description: "I shoot shit", keyatr: "Dex"},
-          {name: 'Druid', description: "I shoot shit", keyatr: "Wis"},
-          {name: 'Bard', description: "I shoot shit", keyatr: "Cha"},
-          {name: 'Paladin', description: "I shoot shit", keyatr: "Str"}]
+    let races = [{name: "Human", description: "Most humans are the descendants of pioneers, conquerors, traders, travelers, refugees, and other people on the move. As a result, human lands are home to a mix of people—physically, culturally, religiously, and politically different. Hardy or fine, light-skinned or dark, showy or austere, primitive or civilized, devout or impious, humans run the gamut.", bonus:"Extra feat, extra skills", languages: "Common"},
+                {name: "Gnome", description: "I am short and useless", bonus:"Extra feat, extra skills"},
+                {name: "Elf", description: "I am pretty and useless", bonus:"Extra feat, extra skills"}
+                  ]
     let state = {
-      dataSource: ds.cloneWithRows(classes),
-      selected: 'Ranger'
+      dataSource: ds.cloneWithRows(races),
     }
     return (
      <ListView
