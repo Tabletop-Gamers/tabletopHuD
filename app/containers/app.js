@@ -5,6 +5,10 @@ import thunk from 'redux-thunk';
 
 import * as reducers from '../reducers/';
 import TabletopHud from './tabletopHud';
+import ClassList from '../components/CharGen/classList'
+import BottomBar from '../components/CharGen/bottombar'
+import CharGen from './charGen'
+
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -14,7 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <TabletopHud />
+        <CharGen />
       </Provider>
     );
   }

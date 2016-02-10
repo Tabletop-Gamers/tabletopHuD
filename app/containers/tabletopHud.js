@@ -33,6 +33,7 @@ class TabletopHud extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E0DEDE',
     alignItems: 'center',
     justifyContent: 'center'
   },
