@@ -1,28 +1,33 @@
 'use strict'
 
 import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native'
+import {Actions} from 'react-native-router-flux'
 
 export default class ClassList extends Component {
 
-  _selectRow(cls) {
-    this.selected = cls
+  constructor(props) {
+    super(props)
   }
 
   _renderRow(row) {
-    let selected = 'Ranger'
+    let selected = this.props.selectedClass
+    let actions = this.props.actions
     if (row.name ===  selected) {
-      row = (<View style={styles.selectedRow}>
+      row = (
+            <View style={styles.selectedRow}>
+            <TouchableOpacity onPress={() => console.log('ButtonPress')}>
               <Text style={styles.rows}>{row.name}</Text>
-              <Text style={styles.selectedText}>{row.description}</Text>
-              <Text>Roles: {row.role}</Text>
-              <Text>Primary Stat: {row.keyatr}</Text>
+                <Text style={styles.selectedText}>{row.description}</Text>
+                <Text>Roles: {row.role}</Text>
+                <Text>Primary Stat: {row.keyatr}</Text>
+            </TouchableOpacity>
             </View>
+            
             )
     } else {
       row = (
         <TouchableOpacity onPress={(e) => {
-          selected= row.props.children.key
-
+          actions.selectClass(row.props.children.key)
         }
         }>
         <Text key={row.name} style={styles.rows}>{row.name}</Text>
@@ -49,12 +54,11 @@ export default class ClassList extends Component {
           {name: 'Paladin', description: "I shoot shit", keyatr: "Str"}]
     let state = {
       dataSource: ds.cloneWithRows(classes),
-      selected: 'Ranger'
     }
     return (
      <ListView
       dataSource={state.dataSource}
-      renderRow={this._renderRow}
+      renderRow={this._renderRow.bind(this)}
       renderSeparator={(section, row) => <View key={`${row}`} style={styles.separator} />}
     />
       )

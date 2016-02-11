@@ -9,18 +9,24 @@ import BottomBar from '../components/CharGen/bottombar'
 import ClassList from '../components/CharGen/classList'
 import RaceList from '../components/CharGen/raceList'
 
-class CharGen extends Component {
+class SelectClass extends Component {
   constructor(props) {
     super(props)
   }
   render() {
-    const {state, actions} = this.props
+    const {selectedClass, selectedRace, currentView, actions} = this.props
+    let view = currentView
+    if (currentView === 'class') {
+      view = <ClassList selectedClass={selectedClass} actions={actions} />
+    } else if (currentView === 'race') {
+      view = <RaceList selectedRace={selectedRace} actions={actions} />
+    }
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <NavBar />
         </View>
-        <RaceList />
+        <ClassList selectedClass={selectedClass} actions={actions} />
         <BottomBar />
       </View>
       )
@@ -37,11 +43,16 @@ let styles = StyleSheet.create({
     backgroundColor: "#5A575A"
   }
 })
-
-export default connect(state => ({
-    state: {}
-  }),
-  (dispatch) => ({
+function mapStateToProps(state) {
+  return {
+    selectedClass: state.UI.selectedClass,
+    selectedRace: state.UI.selectedRace,
+    currentView: state.UI.currentView
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return {
     actions: bindActionCreators(actions, dispatch)
-  })
-)(CharGen);
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SelectClass);

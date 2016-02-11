@@ -4,6 +4,8 @@ import React, { Component, View, Text, StyleSheet, Image, TouchableOpacity } fro
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
+import {Actions} from 'react-native-router-flux'
+
 
 class TabletopHud extends Component {
   constructor(props) {
@@ -17,7 +19,12 @@ class TabletopHud extends Component {
           style={styles.logo}
           source={require('../assets/img/logo.png')}
         />
-        <TouchableOpacity style={styles.logoBtn}>
+        <TouchableOpacity style={styles.logoBtn} 
+        onPress={()=> {
+            actions.changeView('class')
+            Actions.chargen()
+          }
+        }>
           <Text style={styles.logotext}>
             Create a Character
           </Text>
@@ -63,14 +70,20 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#B6B6B6',
     borderRadius: 5,
-
+    borderBottomWidth: 2
   }
 })
 
-export default connect(state => ({
-    state: {}
-  }),
-  (dispatch) => ({
+function mapStateToProps(state) {
+  return {
+    selectedClass: state.UI.selectedClass,
+    selectedRace: state.UI.selectedRace,
+    currentView: state.UI.currentView
+  }
+}
+function mapDispatchToProps(dispatch) {
+  return {
     actions: bindActionCreators(actions, dispatch)
-  })
-)(TabletopHud);
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TabletopHud);

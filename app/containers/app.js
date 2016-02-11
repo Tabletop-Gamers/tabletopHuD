@@ -1,13 +1,15 @@
-import React, { Component } from 'react-native';
+import React, { Component, Navigator } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
 
 import * as reducers from '../reducers/';
 import TabletopHud from './tabletopHud';
 import ClassList from '../components/CharGen/classList'
 import BottomBar from '../components/CharGen/bottombar'
-import CharGen from './charGen'
+import SelectClass from './selectClass'
+import RaceList from '../components/CharGen/raceList'
 
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -18,7 +20,14 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <TabletopHud />
+         <Router hideNavBar={true}>
+            <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+            <Route name="launch" component={TabletopHud} initial={true} />
+            <Route name='chargen' component={SelectClass}>
+            
+              <Route name='racegen' component={RaceList} sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
+            </Route>
+         </Router>
       </Provider>
     );
   }
