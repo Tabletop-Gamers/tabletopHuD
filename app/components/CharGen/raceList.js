@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native'
+import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity, Image } from 'react-native'
 import {Actions} from 'react-native-router-flux'
 
 export default class RaceList extends Component {
@@ -18,16 +18,19 @@ export default class RaceList extends Component {
     let actions = this.props.actions
     if (row.name ===  selected) {
       row = (
-            <View style={styles.selectedRow}>
-              <TouchableOpacity onPress={() => {
-                Actions.selectAtr()
-                actions.changeView('Attributes')
-              }}>
-              <Text style={styles.rows}>{row.name}</Text>
+            <View style={styles.selectedRowContent}>
+              <View style={{flexDirection: 'row', backgroundColor: '#5A575A'}}>
+                  <Text style={styles.selectedRow}>{row.name}</Text>
+                  <TouchableOpacity onPress={() => {
+                    Actions.selectAtr()
+                    actions.changeView('Attributes')
+                  }}>
+                    <Image style={styles.check} source={require('../../assets/img/check.png')}/>
+                  </TouchableOpacity>
+              </View>
               <Text style={styles.selectedText}>{row.description}</Text>
               <Text>Racial Bonus: {row.bonus}</Text>
-              <Text>Languages Known: {row.languages}</Text>
-              </TouchableOpacity>
+                <Text>Languages Known: {row.languages}</Text>
             </View>
             )
     } else {
@@ -68,10 +71,27 @@ let styles = StyleSheet.create({
     fontSize: 20,
   },
   selectedRow: {
+    fontSize: 25,
+    height: 60,
+    flexDirection: 'row',
+    backgroundColor: '#5A575A',
+    justifyContent: 'center',
+    color: "#b6b6b6",
+    padding: 6,
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  selectedRowContent: {
     backgroundColor: '#b6b6b6'
   },
   selectedText: {
     color: '#747274'
+  },
+  check: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginTop: 15,
+    marginRight: 10
   },
   rows: {
     fontSize: 25,

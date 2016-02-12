@@ -44,3 +44,9 @@ export function usePoints(points) {
     data: points
   }
 }
+
+export function resetPoints() {
+  return {
+    type: 'RESET_POINTS'
+  }
+}

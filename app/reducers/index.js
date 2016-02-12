@@ -27,6 +27,8 @@ export function UI(state = {
       return Object.assign({}, state, {points: action.data})
     case 'USE_POINTS':
       return Object.assign({}, state, {pointsUsed: state.pointsUsed + action.data})
+    case 'RESET_POINTS':
+      return Object.assign({}, state, {pointsUsed: 0})
     default:
       return state;
   }
@@ -48,12 +50,12 @@ export function Ruleset(state = {
           ],
   races: [
           {name: "Human", description: "Most humans are the descendants of pioneers, conquerors, traders, travelers, refugees, and other people on the move. As a result, human lands are home to a mix of people—physically, culturally, religiously, and politically different. Hardy or fine, light-skinned or dark, showy or austere, primitive or civilized, devout or impious, humans run the gamut.", bonus:"Extra feat, extra skills", languages: "Common", racial: []},
-          {name: "Dwarves", bonus: "Darkvision", racial: [{name: 'Con', mod: 2}, {name: 'Cha', mod: -2}], languages: "Common, Dwarvish", description: "Dwarves are known for their skill in warfare, their ability to with- stand physical and magical punishment, their knowledge of the earth’s secrets, their hard work, and their capacity for drinking ale. Their mysterious kingdoms, carved out from the insides of mountains, are renowned for the marvelous treasures that they produce as gifts or for trade."},
-          {name: "Elves", bonus: "Low-light vision, Immune to magic sleep effects, resistance to enchantment", racial: [{name: 'Dex', mod: 2}, {name: 'Con', mod: -2}], description: "Elves mingle freely in human lands, always welcome yet never at home there. They are well known for their poetry, dance, song, lore, and magical arts. Elves favor things of natural and simple beauty. When danger threatens their woodland homes, however, elves reveal a more martial side, demonstrating skill with sword, bow, and battle strategy."},
-          {name: "Gnomes", bonus: "Low-light vision", racial: [{name: 'Con', mod: 2}, {name: 'Str', mod: -2}], description: ""},
-          {name: "Half-Elves", bonus: "", racial: [], description: ""},
-          {name: "Half-Orcs", bonus: "", racial: [], description: ""},
-          {name: "Halflings", bonus: "", racial: [], description: ""},
+          {name: "Dwarf", bonus: "Darkvision", racial: [{name: 'Con', mod: 2}, {name: 'Cha', mod: -2}], languages: "Common, Dwarvish", description: "Dwarves are known for their skill in warfare, their ability to with- stand physical and magical punishment, their knowledge of the earth’s secrets, their hard work, and their capacity for drinking ale. Their mysterious kingdoms, carved out from the insides of mountains, are renowned for the marvelous treasures that they produce as gifts or for trade."},
+          {name: "Elf", bonus: "Low-light vision, Immune to magic sleep effects, resistance to enchantment", racial: [{name: 'Dex', mod: 2}, {name: 'Con', mod: -2}], description: "Elves mingle freely in human lands, always welcome yet never at home there. They are well known for their poetry, dance, song, lore, and magical arts. Elves favor things of natural and simple beauty. When danger threatens their woodland homes, however, elves reveal a more martial side, demonstrating skill with sword, bow, and battle strategy."},
+          {name: "Gnome", bonus: "Low-light vision", racial: [{name: 'Con', mod: 2}, {name: 'Str', mod: -2}], description: ""},
+          {name: "Half-Elf", bonus: "", racial: [], description: ""},
+          {name: "Half-Orc", bonus: "", racial: [], description: ""},
+          {name: "Halfling", bonus: "", racial: [], description: ""},
           ],
   attributes: ['Str', 'Dex', 'Con', 'Wis', 'Int', 'Cha']
 }, action = null) {

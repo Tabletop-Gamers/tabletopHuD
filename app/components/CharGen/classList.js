@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native'
+import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity, Image } from 'react-native'
 import {Actions} from 'react-native-router-flux'
 
 export default class ClassList extends Component {
@@ -14,16 +14,19 @@ export default class ClassList extends Component {
     let actions = this.props.actions
     if (row.name ===  selected) {
       row = (
-            <View style={styles.selectedRow}>
-            <TouchableOpacity onPress={() => {
-              Actions.selectRace()
-              actions.changeView('Race')
-            }}>
-              <Text style={styles.rows}>{row.name}</Text>
+            <View style={styles.selectedRowContent}>
+                <View style={{flexDirection: 'row', backgroundColor: '#5A575A'}}>
+                  <Text style={styles.selectedRow}>{row.name}</Text>
+                  <TouchableOpacity onPress={() => {
+                    Actions.selectRace()
+                    actions.changeView('Race')
+                  }}>
+                    <Image style={styles.check} source={require('../../assets/img/check.png')}/>
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.selectedText}>{row.description}</Text>
                 <Text>Roles: {row.role}</Text>
-                <Text>Primary Stat: {row.keyatr[0]}</Text>
-            </TouchableOpacity>
+                  <Text>Primary Stat: {row.keyatr[0]}</Text>
             </View>
             
             )
@@ -66,19 +69,34 @@ let styles = StyleSheet.create({
     fontSize: 20,
   },
   selectedRow: {
-    backgroundColor: '#b6b6b6'
+    fontSize: 25,
+    height: 60,
+    flexDirection: 'row',
+    backgroundColor: '#5A575A',
+    color: "#b6b6b6",
+    padding: 6,
+    flex: 1,
+    alignItems: 'flex-start'
+  },
+  selectedRowContent: {
+    backgroundColor: '#b6b6b6',
+    flex: 1
   },
   selectedText: {
     color: '#747274'
   },
+  check: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginTop: 15,
+    marginRight: 10
+  },
   rows: {
     fontSize: 25,
-    height: 60,
+    height: 50,
     flexDirection: 'row',
     backgroundColor: '#747274',
-    justifyContent: 'center',
     color: "#b6b6b6",
-    alignItems: 'center',
     padding: 6
   },
   separator: {

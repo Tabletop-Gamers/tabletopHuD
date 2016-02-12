@@ -22,10 +22,10 @@ export default class App extends Component {
       <Provider store={store}>
          <Router hideNavBar={true}>
             <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-            <Route name="launch" component={TabletopHud} />
+            <Route name="launch" component={TabletopHud} initial={true}/>
             <Route name='selectClass' component={SelectClass} />
             <Route name="selectRace" component={SelectRace} />
-            <Route name="selectAtr" component={SelectAtr} initial={true} />                     
+            <Route name="selectAtr" component={SelectAtr} />                     
          </Router>
       </Provider>
     );

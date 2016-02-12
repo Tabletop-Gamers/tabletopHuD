@@ -18,9 +18,18 @@ class SelectAtr extends Component {
         <View style={styles.header}>
           <NavBar currentView={currentView} actions={actions}/>
         </View>
-        <AttributeSelect style={{flex: 1}} actions={actions} points={points} racial={racial}attributes={attributes} pointsUsed={pointsUsed} selectedStats={selectedStats} pointBuy={pointBuy}/>
-        <View >
-        <BottomBar style={{flex: 1, alignItems: 'flex-end'}} racial={racial} races={races} attributes={attributes} classAtr={classAtr} />
+        <AttributeSelect style={{flex: 2}}
+         actions={actions}
+         points={points}
+         racial={racial}
+         attributes={attributes}
+         pointsUsed={pointsUsed}
+         selectedStats={selectedStats}
+         pointBuy={pointBuy}
+         selectedClass={selectedClass}
+         selectedRace={selectedRace}/>
+        <View style={styles.bottom}>
+        <BottomBar racial={racial} races={races} attributes={attributes} classAtr={classAtr} />
         </View>
       </View>
       )
@@ -30,12 +39,16 @@ class SelectAtr extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: '#747274'
   },
   header: {
     height: 60,
-    backgroundColor: "#5A575A"
+    backgroundColor: "#5A575A",
+    marginBottom: 5
+  },
+  bottom: {
+    alignSelf: 'auto',
+    flex: 3,
   }
 })
 function mapStateToProps(state) {

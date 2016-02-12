@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component, View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
+import React, { Component, View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView} from 'react-native'
 import {Actions} from 'react-native-router-flux'
 
 export default class PointsBuy extends Component {
@@ -9,9 +9,8 @@ export default class PointsBuy extends Component {
     super(props)
   }
 
-  componentWillMount() {
-    let {actions, selectedStats, attributes, points, racial } = this.props
-    if (selectedStats.length === 0) {
+  resetStat() {
+    let {actions, attributes, racial } = this.props
       let defaultStat = attributes.map((atr) => {
             let value = 10
             racial.forEach((racial) => {
@@ -22,7 +21,11 @@ export default class PointsBuy extends Component {
             return {name: atr, value: value}
       })
       actions.setStats(defaultStat)
-    }
+      actions.resetPoints()
+  }
+
+  componentDidMount() {
+    this.resetStat()
   }
 
   render() {
@@ -38,11 +41,15 @@ export default class PointsBuy extends Component {
             actions.setStats(newStat)
       }
     let view = selectedStats.map((atr) => {
+      let operator = null
+      if(Math.floor((atr.value-10) / 2) > 0) {
+        operator = '+'
+      }  
       return (
         <View key={atr.name} style={styles.row}>
           <Text style={styles.atr}>{atr.name}: </Text>
           <Text style={styles.value}>{atr.value}</Text>
-          <Text style={styles.mod}>Mod: {Math.floor((atr.value-10) / 2)} </Text>
+          <Text style={styles.mod}>Mod: {operator}{Math.floor((atr.value-10) / 2)} </Text>
           <TouchableOpacity  onPress={() => {
             let cost = Math.max(Math.floor((atr.value-9) / 2), 1)
             if(points - (pointsUsed + cost) >= 0) {
@@ -64,24 +71,35 @@ export default class PointsBuy extends Component {
     })
     let confirm = null
     if (points - pointsUsed === 0) {
-      confirm = <Text>Press Here to Confirm</Text>
+      confirm = <Text style={styles.confirmTxt}>CONFIRM</Text>
+    } else {
+      confirm = null
     }
     return (
         <View style={styles.container}>
-        <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-          <Text>
+        <View style={{flexDirection: 'row', alignSelf: 'center', marginBottom: 10}}>
+          <Text style={{color: '#b6b6b6'}}>
           Points Total:
           </Text>
-          <TextInput style={styles.pointsInput} defaultValue={points.toString()} keyboardType={'numeric'} maxLength={2} onChangeText={(value) => actions.setPoints(+value)} />
-          <Text>
+          <TextInput style={styles.pointsInput} placeholder={points.toString()} keyboardType={'numeric'} maxLength={2} onChangeText={(value) => actions.setPoints(+value)} />
+          <Text style={{color: '#b6b6b6'}}>
           Points Left:
           </Text>
-          <Text>
+          <Text style={{color: '#b6b6b6'}}>
           {points - pointsUsed}
           </Text>
         </View>
         {view}
-        {confirm}
+        <View style={{flexDirection: 'row', marginTop: 15 }}>
+          <TouchableOpacity style={styles.confirmBtn}>
+              {confirm}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.resetBtn} onPress={this.resetStat.bind(this)}>
+              <Text style={styles.resetText} >
+              RESET
+            </Text>
+          </TouchableOpacity>
+        </View>
         </View>
       )
   }
@@ -89,21 +107,36 @@ export default class PointsBuy extends Component {
 let styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   atr: {
     flex: 1,
     textAlign: 'left',
     alignItems: 'flex-start',
     fontSize: 30,
-    marginLeft: 5
+    marginLeft: 5,
+    color: '#b6b6b6'
+
+  },
+  confirmBtn: {
+    flex: 1,
+    alignItems: 'flex-start',
+    marginLeft: 10
+
   },
   pointsInput: {
-    height: 20,
     width: 50,
+    height: 20,
+    backgroundColor: 'white',
     borderWidth: 1,
+    marginLeft: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginRight: 10,
     textAlign: 'center',
-    margin: 1
+    fontSize: 10
+    // padding: 0,
+    // color: 'red'
   },
   row: {
     flexDirection: 'row',
@@ -111,15 +144,46 @@ let styles = StyleSheet.create({
   },
   btn: {
     flex: 1,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    marginRight: 10
   },
   value: {
     flex: 1,
     fontSize: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    color: '#b6b6b6'
+
   },
   mod: {
     flex: 1,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    color: '#b6b6b6'
+
+  }, 
+  resetBtn: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginRight: 10,
+  },
+  resetText: {
+    width: 80,
+    height: 20,
+    backgroundColor: 'red',
+    textAlign: 'center',
+    borderRadius: 10,
+    color: '#b6b6b6',
+    borderColor: '#5A575A'
+
+  },
+  confirmTxt: {
+    width: 80,
+    height: 20,
+    backgroundColor: 'green',
+    textAlign: 'center',
+    borderRadius: 10,
+    color: '#b6b6b6',
+    borderColor: '#5A575A'
+
+
   }
 })

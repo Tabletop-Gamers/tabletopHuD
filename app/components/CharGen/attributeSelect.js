@@ -13,7 +13,7 @@ export default class AttributeSelect extends Component {
   }
 
   render() {
-    let actions = this.props.actions
+    let {selectedRace, selectedClass, actions } = this.props
     let view = this.props.pointBuy ? 
       <PointsBuy 
         attributes={this.props.attributes}
@@ -24,7 +24,9 @@ export default class AttributeSelect extends Component {
         pointsUsed={this.props.pointsUsed}/> 
     : <RandomRoll 
         attributes={this.props.attributes}
-        actions={this.props.actions}/>
+        actions={this.props.actions}
+        racial={this.props.racial}
+        selectedStats={this.props.selectedStats}/>
     return (
       <View>
         <View style={styles.subHeader}>
@@ -36,6 +38,9 @@ export default class AttributeSelect extends Component {
             Point Buy
           </Text>
         </View>
+        <Text style={styles.yourHero}>
+          {selectedRace} {selectedClass}
+        </Text>
         {view}
       </View>
       )
@@ -46,11 +51,19 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     borderBottomWidth: 3,
+    borderBottomColor: '#b6b6b6'
   },
   subText: {
     textAlignVertical: 'center',
     alignItems: 'center',
     fontSize: 20,
-    margin: 5
+    margin: 5,
+    color: '#b6b6b6'
+  },
+  yourHero: {
+    textAlignVertical: 'center',
+    fontSize: 30,
+    textAlign: 'center',
+    color: '#b6b6b6'
   }
 })
