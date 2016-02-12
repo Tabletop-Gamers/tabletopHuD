@@ -14,14 +14,14 @@ class SelectClass extends Component {
     super(props)
   }
   render() {
-    const {selectedClass, selectedRace, currentView, classAtr, racial, actions} = this.props
+    const {selectedClass, classes, races, attributes, selectedRace, currentView, classAtr, racial, actions} = this.props
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <NavBar />
+          <NavBar currentView={currentView} actions={actions}/>
         </View>
-        <ClassList selectedClass={selectedClass} actions={actions} />
-        <BottomBar racial={racial} classAtr={classAtr} />
+        <ClassList selectedClass={selectedClass} classes={classes} actions={actions} />
+        <BottomBar racial={racial} races={races} attributes={attributes} classAtr={classAtr} />
       </View>
       )
   }
@@ -43,7 +43,10 @@ function mapStateToProps(state) {
     selectedRace: state.UI.selectedRace,
     currentView: state.UI.currentView,
     racial: state.UI.racial,
-    classAtr: state.UI.classAtr
+    classAtr: state.UI.classAtr,
+    classes: state.Ruleset.classes,
+    attributes: state.Ruleset.attributes,
+    races: state.Ruleset.races
   }
 }
 function mapDispatchToProps(dispatch) {

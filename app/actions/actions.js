@@ -17,3 +17,30 @@ export function selectRace(race) {
     data: race
   }
 }
+
+export function pointBuy(bool) {
+  return {
+    type: 'SELECT_STAT_SYSTEM',
+    data: bool
+  }
+}
+
+export function setStats(stats) {
+  return {
+    type: 'SET_STATS',
+    data: stats
+  }
+}
+
+export function setPoints(points) {
+  return {
+    type: 'SET_POINTS',
+    data: points
+  }
+}
+export function usePoints(points) {
+  return {
+    type: 'USE_POINTS',
+    data: points
+  }
+}

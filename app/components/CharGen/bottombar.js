@@ -6,7 +6,7 @@ export default class BottomBar extends Component {
   render() {
     let selected = this.props.classAtr
     let racial = this.props.racial
-    let attributes = ['Str', 'Dex', 'Con', 'Wis', 'Int', 'Cha']
+    let attributes = this.props.attributes
     let index = 1
     return (
       <View style={styles.container}>

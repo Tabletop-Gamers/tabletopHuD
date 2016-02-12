@@ -21,8 +21,8 @@ class TabletopHud extends Component {
         />
         <TouchableOpacity style={styles.logoBtn} 
         onPress={()=> {
-            actions.changeView('class')
-            Actions.chargen()
+            actions.changeView('Class')
+            Actions.selectClass()
           }
         }>
           <Text style={styles.logotext}>

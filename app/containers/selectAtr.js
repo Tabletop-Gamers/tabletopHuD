@@ -5,20 +5,23 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 import NavBar from '../components/navbar'
+import AttributeSelect from '../components/CharGen/attributeSelect'
 import BottomBar from '../components/CharGen/bottombar'
-
 class SelectAtr extends Component {
   constructor(props) {
     super(props)
   }
   render() {
-    const {selectedClass, racial, classAtr, selectedRace, actions} = this.props
+    const {selectedClass, racial, pointBuy, classAtr, pointsUsed, selectedRace, points, currentView, races, selectedStats, actions, attributes} = this.props
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <NavBar />
+          <NavBar currentView={currentView} actions={actions}/>
         </View>
-        <BottomBar racial={racial} classAtr={classAtr} />
+        <AttributeSelect style={{flex: 1}} actions={actions} points={points} racial={racial}attributes={attributes} pointsUsed={pointsUsed} selectedStats={selectedStats} pointBuy={pointBuy}/>
+        <View >
+        <BottomBar style={{flex: 1, alignItems: 'flex-end'}} racial={racial} races={races} attributes={attributes} classAtr={classAtr} />
+        </View>
       </View>
       )
   }
@@ -27,6 +30,7 @@ class SelectAtr extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#747274'
   },
   header: {
@@ -40,7 +44,14 @@ function mapStateToProps(state) {
     selectedRace: state.UI.selectedRace,
     currentView: state.UI.currentView,
     racial: state.UI.racial,
-    classAtr: state.UI.classAtr
+    classAtr: state.UI.classAtr,
+    classes: state.Ruleset.classes,
+    attributes: state.Ruleset.attributes,
+    races: state.Ruleset.races,
+    pointBuy: state.UI.pointBuy,
+    selectedStats: state.UI.selectedStats,
+    points: state.UI.points,
+    pointsUsed: state.UI.pointsUsed
   }
 }
 function mapDispatchToProps(dispatch) {

@@ -5,14 +5,25 @@ import {Actions} from 'react-native-router-flux'
 
 export default class NavBar extends Component {
   render() {
+    let currentView = this.props.currentView
+    let actions = this.props.actions
+    let previousView = currentView === "Race" ? "Class" : "Race" 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() =>Actions.pop()}>
+        <TouchableOpacity style={styles.backBox} onPress={() => {
+          Actions.pop()
+          actions.changeView(previousView)
+        }}>
           <Text style={styles.back}>
             Back
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{alignItems: 'flex-end'}}onPress={() => Actions.launch()}>
+        <View style={styles.titleBox}>
+        <Text style={styles.title}>
+          {currentView}
+        </Text>
+        </View>
+        <TouchableOpacity style={styles.homeBox}onPress={() => Actions.launch()}>
           <Text style={styles.home}>
             Home
           </Text>
@@ -24,18 +35,38 @@ export default class NavBar extends Component {
 
 let styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
-  back: {
+  backBox: {
+    flex: 1,
+    alignItems: 'flex-start',
     marginTop: 20,
     marginLeft: 5,
+  },
+  titleBox: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  homeBox: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginTop: 20,
+    marginRight: 5,
+  },
+  back: {
+
     fontSize: 20,
     color: "#b6b6b6",
   },
   home: {
+  
+    fontSize: 20,
+    color: "#b6b6b6",
+  },
+  title: {
     marginTop: 20,
     marginLeft: 5,
-    alignItems: 'flex-end',
+    alignItems: 'center',
     fontSize: 20,
     color: "#b6b6b6",
   }
