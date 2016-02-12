@@ -1,30 +1,39 @@
 'use strict'
 
 import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity } from 'react-native'
+import {Actions} from 'react-native-router-flux'
 
 export default class RaceList extends Component {
+
+  constructor(props) {
+    super(props)
+  }
 
   _selectRow(cls) {
     this.selected = cls
   }
 
   _renderRow(row) {
-    let selected = 'Human'
+    let selected = this.props.selectedRace
+    let actions = this.props.actions
     if (row.name ===  selected) {
-      row = (<View style={styles.selectedRow}>
+      row = (
+            <View style={styles.selectedRow}>
               <Text style={styles.rows}>{row.name}</Text>
               <Text style={styles.selectedText}>{row.description}</Text>
               <Text>Racial Bonus: {row.bonus}</Text>
+              <TouchableOpacity onPress={() => Actions.selectAtr()}>
               <Text>Languages Known: {row.languages}</Text>
+              </TouchableOpacity>
             </View>
             )
     } else {
+      let name = row.name
+      let racial = row.racial
       row = (
-        <TouchableOpacity onPress={(e) => {
-          selected= row.props.children.key
-
-        }
-        }>
+        <TouchableOpacity onPress={() => {
+          actions.selectRace({name: name, racial: racial})
+        }}>
         <Text key={row.name} style={styles.rows}>{row.name}</Text>
         </TouchableOpacity>
         )
@@ -37,9 +46,9 @@ export default class RaceList extends Component {
   }
   render() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let races = [{name: "Human", description: "Most humans are the descendants of pioneers, conquerors, traders, travelers, refugees, and other people on the move. As a result, human lands are home to a mix of people—physically, culturally, religiously, and politically different. Hardy or fine, light-skinned or dark, showy or austere, primitive or civilized, devout or impious, humans run the gamut.", bonus:"Extra feat, extra skills", languages: "Common"},
-                {name: "Gnome", description: "I am short and useless", bonus:"Extra feat, extra skills"},
-                {name: "Elf", description: "I am pretty and useless", bonus:"Extra feat, extra skills"}
+    let races = [{name: "Human", description: "Most humans are the descendants of pioneers, conquerors, traders, travelers, refugees, and other people on the move. As a result, human lands are home to a mix of people—physically, culturally, religiously, and politically different. Hardy or fine, light-skinned or dark, showy or austere, primitive or civilized, devout or impious, humans run the gamut.", bonus:"Extra feat, extra skills", languages: "Common", racial: []},
+                {name: "Gnome", description: "I am short and useless", bonus:"Extra feat, extra skills", racial:[{name:'Str', mod: -2}, {name: "Con", mod: -2 }]},
+                {name: "Elf", description: "I am pretty and useless", bonus:"Extra feat, extra skills", racial: []}
                   ]
     let state = {
       dataSource: ds.cloneWithRows(races),
@@ -47,7 +56,7 @@ export default class RaceList extends Component {
     return (
      <ListView
       dataSource={state.dataSource}
-      renderRow={this._renderRow}
+      renderRow={this._renderRow.bind(this)}
       renderSeparator={(section, row) => <View key={`${row}`} style={styles.separator} />}
     />
       )

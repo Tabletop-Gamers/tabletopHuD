@@ -6,7 +6,6 @@ import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 import NavBar from '../components/navbar'
 import BottomBar from '../components/CharGen/bottombar'
-import ClassList from '../components/CharGen/classList'
 import RaceList from '../components/CharGen/raceList'
 
 class SelectClass extends Component {
@@ -14,13 +13,13 @@ class SelectClass extends Component {
     super(props)
   }
   render() {
-    const {selectedClass, selectedRace, currentView, classAtr, racial, actions} = this.props
+    const {selectedClass, racial, classAtr, selectedRace, actions} = this.props
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <NavBar />
         </View>
-        <ClassList selectedClass={selectedClass} actions={actions} />
+        <RaceList selectedClass={selectedClass} selectedRace={selectedRace} actions={actions} />
         <BottomBar racial={racial} classAtr={classAtr} />
       </View>
       )

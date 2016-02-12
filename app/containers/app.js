@@ -9,8 +9,8 @@ import TabletopHud from './tabletopHud';
 import ClassList from '../components/CharGen/classList'
 import BottomBar from '../components/CharGen/bottombar'
 import SelectClass from './selectClass'
-import RaceList from '../components/CharGen/raceList'
-
+import SelectRace from './selectRace'
+import SelectAtr from './selectAtr'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -23,10 +23,9 @@ export default class App extends Component {
          <Router hideNavBar={true}>
             <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
             <Route name="launch" component={TabletopHud} initial={true} />
-            <Route name='chargen' component={SelectClass}>
-            
-              <Route name='racegen' component={RaceList} sceneConfig={Navigator.SceneConfigs.FloatFromRight} />
-            </Route>
+            <Route name='chargen' component={SelectClass} />
+            <Route name="selectRace" component={SelectRace} />
+            <Route name="selectAtr" component={SelectAtr} />                     
          </Router>
       </Provider>
     );

@@ -15,19 +15,21 @@ export default class ClassList extends Component {
     if (row.name ===  selected) {
       row = (
             <View style={styles.selectedRow}>
-            <TouchableOpacity onPress={() => console.log('ButtonPress')}>
+            <TouchableOpacity onPress={() => Actions.selectRace()}>
               <Text style={styles.rows}>{row.name}</Text>
                 <Text style={styles.selectedText}>{row.description}</Text>
                 <Text>Roles: {row.role}</Text>
-                <Text>Primary Stat: {row.keyatr}</Text>
+                <Text>Primary Stat: {row.keyatr[0]}</Text>
             </TouchableOpacity>
             </View>
             
             )
     } else {
+      let atr = row.keyatr
+      let name = row.name
       row = (
         <TouchableOpacity onPress={(e) => {
-          actions.selectClass(row.props.children.key)
+          actions.selectClass({name: name, atr: atr})
         }
         }>
         <Text key={row.name} style={styles.rows}>{row.name}</Text>
@@ -42,16 +44,16 @@ export default class ClassList extends Component {
   }
   render() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let classes = [{name: 'Fighter', description: "I FIGHT SHIT", keyatr: "Str"}, 
-          {name: 'Ranger', description: "A ranger often accepts the role of protector, aiding those who live in or travel through the woods. In addition, a ranger carries grudges against certain types of creatures and looks for opportunities to find and destroy them. He may adventure for all the reasons that a fighter does.", role:"Ranged or Melee Combat", keyatr: "Dex"},
-          {name: 'Cleric', description: "I shoot shit", keyatr: "Wis"},
-          {name: 'Rogue', description: "I shoot shit", keyatr: "Dex"},
-          {name: 'Wizard', description: "I shoot shit", keyatr: "Int"},
-          {name: 'Sorcerer', description: "I shoot shit", keyatr: "Int"},
-          {name: 'Monk', description: "I shoot shit", keyatr: "Dex"},
-          {name: 'Druid', description: "I shoot shit", keyatr: "Wis"},
-          {name: 'Bard', description: "I shoot shit", keyatr: "Cha"},
-          {name: 'Paladin', description: "I shoot shit", keyatr: "Str"}]
+    let classes = [{name: 'Fighter', description: "I FIGHT SHIT", keyatr: ["Str", "Con"]}, 
+          {name: 'Ranger', description: "A ranger often accepts the role of protector, aiding those who live in or travel through the woods. In addition, a ranger carries grudges against certain types of creatures and looks for opportunities to find and destroy them. He may adventure for all the reasons that a fighter does.", role:"Ranged or Melee Combat", keyatr: ["Dex", "Wis"]},
+          {name: 'Cleric', description: "I shoot shit", keyatr: ["Wis"]},
+          {name: 'Rogue', description: "I shoot shit", keyatr: ["Dex"]},
+          {name: 'Wizard', description: "I shoot shit", keyatr: ["Int"]},
+          {name: 'Sorcerer', description: "I shoot shit", keyatr: ["Int"]},
+          {name: 'Monk', description: "I shoot shit", keyatr: ["Dex"]},
+          {name: 'Druid', description: "I shoot shit", keyatr: ["Wis"]},
+          {name: 'Bard', description: "I shoot shit", keyatr: ["Cha"]},
+          {name: 'Paladin', description: "I shoot shit", keyatr: ["Str"]}]
     let state = {
       dataSource: ds.cloneWithRows(classes),
     }

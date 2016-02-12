@@ -12,7 +12,7 @@ export default class NavBar extends Component {
             Back
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => Actions.launch()}>
+        <TouchableOpacity style={{alignItems: 'flex-end'}}onPress={() => Actions.launch()}>
           <Text style={styles.home}>
             Home
           </Text>

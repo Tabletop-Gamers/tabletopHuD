@@ -1,8 +1,3 @@
-export function test() {
-  return {
-    type: 'TEST'
-  }
-}
 export function changeView(view) {
   return {
     type: 'CHANGE_VIEW',
@@ -18,7 +13,7 @@ export function selectClass(cls) {
 }
 export function selectRace(race) {
   return {
-    type: 'SELECT_CLASS',
+    type: 'SELECT_RACE',
     data: race
   }
 }

@@ -4,8 +4,8 @@ import React, { Component, View, Text, StyleSheet } from 'react-native'
 
 export default class BottomBar extends Component {
   render() {
-    let selected = []
-    let racial = []
+    let selected = this.props.classAtr
+    let racial = this.props.racial
     let attributes = ['Str', 'Dex', 'Con', 'Wis', 'Int', 'Cha']
     let index = 1
     return (
