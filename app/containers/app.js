@@ -21,7 +21,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
          <Router hideNavBar={true}>
-            <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+            <Schema name="default" sceneConfig={Navigator.SceneConfigs.HorizontalSwipeJump}/>
             <Route name="launch" component={TabletopHud} initial={true}/>
             <Route name='selectClass' component={SelectClass} />
             <Route name="selectRace" component={SelectRace} />
