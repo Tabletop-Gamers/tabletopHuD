@@ -18,8 +18,10 @@ export default class PointsBuy extends Component {
                 value = racial.mod + 10
               }
             })
-            return {name: atr, value: value}
+            let mod = Math.floor((value-10) / 2)
+            return {name: atr, value: value, mod: mod}
       })
+      console.log(defaultStat)
       actions.setStats(defaultStat)
       actions.resetPoints()
   }
@@ -33,9 +35,11 @@ export default class PointsBuy extends Component {
     let changeStat = function (atr, value) {
         let newStat = selectedStats.map((stat) => {
               if (stat.name === atr.name) {
-                return {name: stat.name, value: value}
+                let mod = Math.floor((value-10) / 2)
+                return {name: stat.name, value: value, mod: mod}
               } else {
-                return {name: stat.name, value: stat.value}
+                let mod = Math.floor((stat.value-10) / 2)
+                return {name: stat.name, value: stat.value, mod: mod}
               }
             })
             actions.setStats(newStat)
@@ -91,7 +95,10 @@ export default class PointsBuy extends Component {
         </View>
         {view}
         <View style={{flexDirection: 'row', marginTop: 15 }}>
-          <TouchableOpacity style={styles.confirmBtn}>
+          <TouchableOpacity style={styles.confirmBtn} onPress={() =>  {
+                  Actions.selectSkill()
+                  actions.changeView('Skills')
+                }}>
               {confirm}
           </TouchableOpacity>
           <TouchableOpacity style={styles.resetBtn} onPress={this.resetStat.bind(this)}>
