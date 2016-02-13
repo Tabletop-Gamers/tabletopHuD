@@ -135,8 +135,6 @@ let styles = StyleSheet.create({
     marginRight: 10,
     textAlign: 'center',
     fontSize: 10
-    // padding: 0,
-    // color: 'red'
   },
   row: {
     flexDirection: 'row',
