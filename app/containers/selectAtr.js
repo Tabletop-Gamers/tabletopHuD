@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import NavBar from '../components/navbar'
 import AttributeSelect from '../components/CharGen/attributeSelect'
 import BottomBar from '../components/CharGen/bottombar'
+import colors from '../assets/constants/colors'
+
 class SelectAtr extends Component {
   constructor(props) {
     super(props)
@@ -39,12 +41,13 @@ class SelectAtr extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#747274'
+    backgroundColor: colors.secondary
   },
   header: {
     height: 60,
-    backgroundColor: "#5A575A",
-    marginBottom: 5
+    backgroundColor: colors.primary,
+    borderBottomColor: colors.secondary,
+    borderBottomWidth: 2
   },
   bottom: {
     alignSelf: 'auto',

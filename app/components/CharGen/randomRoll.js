@@ -7,6 +7,8 @@ import React,{
     TouchableOpacity
 } from 'react-native'
 import {Actions} from 'react-native-router-flux'
+import colors from '../../assets/constants/colors'
+
 
 
 export default class RandomRoll extends Component{
@@ -93,7 +95,7 @@ let styles = StyleSheet.create({
     alignItems: 'flex-start',
     fontSize: 30,
     marginLeft: 5,
-    color: '#b6b6b6'
+    color: colors.text
   },
   confirmBtn: {
     flex: 1,
@@ -105,13 +107,13 @@ let styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     alignItems: 'center',
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   mod: {
     flex: 1,
     alignItems: 'flex-end',
-    color: '#b6b6b6'
+    color: colors.text
   }, 
   resetBtn: {
     flex: 1,
@@ -122,7 +124,7 @@ let styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     alignItems: 'center',
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   resetText: {
@@ -131,7 +133,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'red',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
   },
   confirmTxt: {
@@ -140,7 +142,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'green',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
   }
 })

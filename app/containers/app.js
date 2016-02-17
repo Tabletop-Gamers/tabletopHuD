@@ -12,6 +12,7 @@ import SelectClass from './selectClass'
 import SelectRace from './selectRace'
 import SelectAtr from './selectAtr'
 import SelectSkill from './selectSkill'
+import SelectFeat from './selectFeat'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
@@ -27,7 +28,8 @@ export default class App extends Component {
             <Route name='selectClass' component={SelectClass} />
             <Route name="selectRace" component={SelectRace} />
             <Route name="selectAtr" component={SelectAtr} />
-            <Route name="selectSkill" component={SelectSkill}  />                    
+            <Route name="selectSkill" component={SelectSkill} />
+            <Route name="selectFeat" component={SelectFeat} />                    
          </Router>
       </Provider>
     );

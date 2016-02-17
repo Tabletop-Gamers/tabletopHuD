@@ -2,6 +2,8 @@
 
 import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity, Image } from 'react-native'
 import {Actions} from 'react-native-router-flux'
+import colors from '../../assets/constants/colors'
+
 
 export default class RaceList extends Component {
 
@@ -19,7 +21,7 @@ export default class RaceList extends Component {
     if (row.name ===  selected) {
       row = (
             <View style={styles.selectedRowContent}>
-              <View style={{flexDirection: 'row', backgroundColor: '#5A575A'}}>
+              <View style={{flexDirection: 'row', backgroundColor: colors.primary}}>
                   <Text style={styles.selectedRow}>{row.name}</Text>
                   <TouchableOpacity onPress={() => {
                     Actions.selectAtr()
@@ -74,18 +76,18 @@ let styles = StyleSheet.create({
     fontSize: 25,
     height: 60,
     flexDirection: 'row',
-    backgroundColor: '#5A575A',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
-    color: "#b6b6b6",
+    color: colors.selectedText,
     padding: 6,
     flex: 1,
     alignItems: 'flex-start',
   },
   selectedRowContent: {
-    backgroundColor: '#b6b6b6'
+    backgroundColor: colors.selected
   },
   selectedText: {
-    color: '#747274'
+    color: colors.text
   },
   check: {
     flex: 1,
@@ -97,14 +99,14 @@ let styles = StyleSheet.create({
     fontSize: 25,
     height: 60,
     flexDirection: 'row',
-    backgroundColor: '#747274',
+    backgroundColor: colors.secondary,
     justifyContent: 'center',
-    color: "#b6b6b6",
+    color: colors.text,
     alignItems: 'center',
     padding: 6
   },
   separator: {
     height: 1,
-    backgroundColor: "#5A575A"
+    backgroundColor: colors.primary
   },
 })

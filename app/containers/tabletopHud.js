@@ -6,6 +6,8 @@ import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 import {Actions} from 'react-native-router-flux'
 
+import colors from '../assets/constants/colors'
+
 
 class TabletopHud extends Component {
   constructor(props) {
@@ -47,7 +49,7 @@ class TabletopHud extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3A383A',
+    backgroundColor: colors.splash,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -61,14 +63,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
     fontSize: 20,
-    color: '#3A383A'
+    color: colors.text
   },
   logoBtn: {
     alignItems: 'center',
     marginTop: 20,
     width: 200,
     height: 40,
-    backgroundColor: '#B6B6B6',
+    backgroundColor: colors.secondary,
     borderRadius: 5,
     borderBottomWidth: 2
   }

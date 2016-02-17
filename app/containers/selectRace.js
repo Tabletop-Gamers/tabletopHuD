@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import NavBar from '../components/navbar'
 import BottomBar from '../components/CharGen/bottombar'
 import RaceList from '../components/CharGen/raceList'
+import colors from '../assets/constants/colors'
+
 
 class SelectClass extends Component {
   constructor(props) {
@@ -29,11 +31,13 @@ class SelectClass extends Component {
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#747274'
+    backgroundColor: colors.secondary
   },
   header: {
     height: 60,
-    backgroundColor: "#5A575A"
+    backgroundColor: colors.primary,
+    borderBottomColor: colors.secondary,
+    borderBottomWidth: 2
   }
 })
 function mapStateToProps(state) {
