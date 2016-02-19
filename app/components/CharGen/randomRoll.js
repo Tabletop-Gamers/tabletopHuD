@@ -6,6 +6,9 @@ import React,{
     Text,
     TouchableOpacity
 } from 'react-native'
+import {Actions} from 'react-native-router-flux'
+import colors from '../../assets/constants/colors'
+
 
 
 export default class RandomRoll extends Component{
@@ -31,27 +34,19 @@ export default class RandomRoll extends Component{
             racial.forEach((bonus) => {
               if(bonus.name === atr) {
                 value = value + bonus.mod
-          }
+              }
         })
-            return {name: atr, value: value}
+            let mod = Math.floor((value-10) / 2)
+            return {name: atr, value: value, mod: mod}
       })
       actions.setStats(defaultStat)
     }
-    confirmStat() {
-      let {actions, attributes, selectedStats, racial } = this.props
-      let confirmedStats = selectedStats.map((stat) => {
-        
-        return {name: stat.name, value: stat.value}
-      })
-      actions.setStats(confirmedStats)
-
-    }
 
     componentDidMount() {
-      this.resetStat()
+        this.resetStat()
     }
     render(){
-        let {attributes, selectedStats, racial} = this.props
+        let {attributes, selectedStats, racial, actions} = this.props
         let view = selectedStats.map((atr) => {  
           let operator = null
           if(Math.floor((atr.value-10) / 2) > 0) {
@@ -69,7 +64,10 @@ export default class RandomRoll extends Component{
             <View style={styles.container}>
               {view}
               <View style={{flexDirection: 'row', marginTop: 15 }}>
-                <TouchableOpacity style={styles.confirmBtn}>
+                <TouchableOpacity style={styles.confirmBtn} onPress={() =>  {
+                  Actions.selectSkill()
+                  actions.changeView('Skills')
+                }}>
                   <Text style={styles.confirmTxt}>CONFIRM</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.resetBtn} onPress={this.resetStat.bind(this)}>
@@ -97,7 +95,7 @@ let styles = StyleSheet.create({
     alignItems: 'flex-start',
     fontSize: 30,
     marginLeft: 5,
-    color: '#b6b6b6'
+    color: colors.text
   },
   confirmBtn: {
     flex: 1,
@@ -109,13 +107,13 @@ let styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     alignItems: 'center',
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   mod: {
     flex: 1,
     alignItems: 'flex-end',
-    color: '#b6b6b6'
+    color: colors.text
   }, 
   resetBtn: {
     flex: 1,
@@ -126,7 +124,7 @@ let styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     alignItems: 'center',
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   resetText: {
@@ -135,7 +133,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'red',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
   },
   confirmTxt: {
@@ -144,7 +142,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'green',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
   }
 })

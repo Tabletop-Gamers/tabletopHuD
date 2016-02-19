@@ -2,6 +2,7 @@
 
 import React, { Component, View, Text, StyleSheet, ListView, TouchableOpacity, Image } from 'react-native'
 import {Actions} from 'react-native-router-flux'
+import colors from '../../assets/constants/colors'
 
 export default class ClassList extends Component {
 
@@ -12,10 +13,10 @@ export default class ClassList extends Component {
   _renderRow(row) {
     let selected = this.props.selectedClass
     let actions = this.props.actions
-    if (row.name ===  selected) {
+    if (row.name ===  selected.name) {
       row = (
             <View style={styles.selectedRowContent}>
-                <View style={{flexDirection: 'row', backgroundColor: '#5A575A'}}>
+                <View style={{flexDirection: 'row', backgroundColor: colors.primary}}>
                   <Text style={styles.selectedRow}>{row.name}</Text>
                   <TouchableOpacity onPress={() => {
                     Actions.selectRace()
@@ -33,9 +34,11 @@ export default class ClassList extends Component {
     } else {
       let atr = row.keyatr
       let name = row.name
+      let skill = row.skillMod
+      let classSkill = row.classSkills
       row = (
         <TouchableOpacity onPress={(e) => {
-          actions.selectClass({name: name, atr: atr})
+          actions.selectClass({name: name, atr: atr, skillMod: skill, classSkills: classSkill})
         }
         }>
         <Text key={row.name} style={styles.rows}>{row.name}</Text>
@@ -72,18 +75,18 @@ let styles = StyleSheet.create({
     fontSize: 25,
     height: 60,
     flexDirection: 'row',
-    backgroundColor: '#5A575A',
-    color: "#b6b6b6",
+    backgroundColor: colors.primary,
+    color: colors.selectedText,
     padding: 6,
     flex: 1,
     alignItems: 'flex-start'
   },
   selectedRowContent: {
-    backgroundColor: '#b6b6b6',
+    backgroundColor: colors.selected,
     flex: 1
   },
   selectedText: {
-    color: '#747274'
+    color: colors.text
   },
   check: {
     flex: 1,
@@ -95,12 +98,12 @@ let styles = StyleSheet.create({
     fontSize: 25,
     height: 50,
     flexDirection: 'row',
-    backgroundColor: '#747274',
-    color: "#b6b6b6",
+    backgroundColor: colors.secondary,
+    color: colors.text,
     padding: 6
   },
   separator: {
     height: 1,
-    backgroundColor: "#5A575A"
+    backgroundColor: colors.primary
   },
 })

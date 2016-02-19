@@ -5,6 +5,8 @@ import {Actions} from 'react-native-router-flux'
 
 import PointsBuy from './pointsBuy'
 import RandomRoll from './randomRoll'
+import colors from '../../assets/constants/colors'
+
 
 export default class AttributeSelect extends Component {
 
@@ -39,7 +41,7 @@ export default class AttributeSelect extends Component {
           </Text>
         </View>
         <Text style={styles.yourHero}>
-          {selectedRace} {selectedClass}
+          {selectedRace} {selectedClass.name}
         </Text>
         {view}
       </View>
@@ -50,20 +52,20 @@ let styles = StyleSheet.create({
   subHeader: {
     flexDirection: 'row',
     justifyContent: 'center',
-    borderBottomWidth: 3,
-    borderBottomColor: '#b6b6b6'
+    borderBottomWidth: 6,
+    borderBottomColor: colors.primary
   },
   subText: {
     textAlignVertical: 'center',
     alignItems: 'center',
     fontSize: 20,
     margin: 5,
-    color: '#b6b6b6'
+    color: colors.text
   },
   yourHero: {
     textAlignVertical: 'center',
     fontSize: 30,
     textAlign: 'center',
-    color: '#b6b6b6'
+    color: colors.text
   }
 })

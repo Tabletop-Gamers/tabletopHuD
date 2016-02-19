@@ -50,3 +50,34 @@ export function resetPoints() {
     type: 'RESET_POINTS'
   }
 }
+
+export function useSkillPoints(value) {
+  return {
+    type: 'SPEND_SKILL_POINTS',
+    data: value 
+  }
+}
+export function setSkills(skills) {
+  return {
+    type: 'SET_SKILLS',
+    data: skills
+  }
+}
+export function resetSkillPoints() {
+  return {
+    type: 'RESET_SKILL_POINTS'
+  }
+}
+export function selectSkill(skill) {
+  return {
+    type: 'SELECT_SKILL',
+    data: skill
+  }
+}
+
+export function setDatasourceSkill(ds) {
+  return {
+    type: 'SET_DATASOURCE_SKILLS',
+    data: ds
+  }
+}

@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component, View, Text, StyleSheet } from 'react-native'
+import colors from '../../assets/constants/colors'
 
 export default class BottomBar extends Component {
   render() {
@@ -18,13 +19,13 @@ export default class BottomBar extends Component {
                     if(bonus.name === atr && bonus.mod > 0) {
                       return (
                         <View key={index++} style={styles.boxPlus}>
-                          <Text style={{color: "#b6b6b6"}}>{bonus.mod}</Text>
+                          <Text style={{color: colors.text}}>{bonus.mod}</Text>
                         </View>
                         )
                     } else if (bonus.name === atr) {
                       return (
                         <View key={index++} style={styles.boxMinus}>
-                          <Text style={{color: "#b6b6b6"}}>{Math.abs(bonus.mod)}</Text>
+                          <Text style={{color: colors.text}}>{Math.abs(bonus.mod)}</Text>
                         </View>
                         )
                     }
@@ -39,13 +40,13 @@ export default class BottomBar extends Component {
                     if(bonus.name === atr && bonus.mod > 0) {
                       return (
                         <View key={index++} style={styles.boxPlus}>
-                          <Text style={{color: "#b6b6b6"}}>{bonus.mod}</Text>
+                          <Text style={{color: colors.text}}>{bonus.mod}</Text>
                         </View>
                         )
                     } else if (bonus.name === atr) {
                       return (
                         <View key={index++} style={styles.boxMinus}>
-                          <Text style={{color: "#b6b6b6"}}>{Math.abs(bonus.mod)}</Text>
+                          <Text style={{color: colors.text}}>{Math.abs(bonus.mod)}</Text>
                         </View>
                         )
                     }
@@ -65,7 +66,7 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     bottom: 0,
-    backgroundColor: '#5A575A'
+    backgroundColor: colors.primary
   },
   box: {
     flexDirection: 'row',
@@ -86,8 +87,10 @@ let styles = StyleSheet.create({
   atrText: {
     margin: 4,
     textAlign: 'center',
-    backgroundColor: '#747274',
-    color: "#b6b6b6",
+    borderWidth: 1,
+    borderColor: colors.secondary,
+    backgroundColor: colors.primary,
+    color: colors.text,
     width: 50,
     height: 20,
   },
@@ -96,7 +99,7 @@ let styles = StyleSheet.create({
     height: 20,
     margin: 4,
     textAlign: 'center',
-    backgroundColor: '#b6b6b6',
-    color: "#747274",
+    backgroundColor: colors.selected,
+    color: colors.selectedText,
   }
 })

@@ -2,6 +2,7 @@
 
 import React, { Component, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import {Actions} from 'react-native-router-flux'
+import colors from '../assets/constants/colors'
 
 export default class NavBar extends Component {
   render() {
@@ -56,18 +57,18 @@ let styles = StyleSheet.create({
   back: {
 
     fontSize: 20,
-    color: "#b6b6b6",
+    color: colors.text,
   },
   home: {
   
     fontSize: 20,
-    color: "#b6b6b6",
+    color: colors.text,
   },
   title: {
     marginTop: 20,
     marginLeft: 5,
     alignItems: 'center',
     fontSize: 20,
-    color: "#b6b6b6",
+    color: colors.secondary,
   }
 })

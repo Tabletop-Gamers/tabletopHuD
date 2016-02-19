@@ -2,6 +2,8 @@
 
 import React, { Component, View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView} from 'react-native'
 import {Actions} from 'react-native-router-flux'
+import colors from '../../assets/constants/colors'
+
 
 export default class PointsBuy extends Component {
 
@@ -18,7 +20,8 @@ export default class PointsBuy extends Component {
                 value = racial.mod + 10
               }
             })
-            return {name: atr, value: value}
+            let mod = Math.floor((value-10) / 2)
+            return {name: atr, value: value, mod: mod}
       })
       actions.setStats(defaultStat)
       actions.resetPoints()
@@ -33,9 +36,11 @@ export default class PointsBuy extends Component {
     let changeStat = function (atr, value) {
         let newStat = selectedStats.map((stat) => {
               if (stat.name === atr.name) {
-                return {name: stat.name, value: value}
+                let mod = Math.floor((value-10) / 2)
+                return {name: stat.name, value: value, mod: mod}
               } else {
-                return {name: stat.name, value: stat.value}
+                let mod = Math.floor((stat.value-10) / 2)
+                return {name: stat.name, value: stat.value, mod: mod}
               }
             })
             actions.setStats(newStat)
@@ -78,20 +83,23 @@ export default class PointsBuy extends Component {
     return (
         <View style={styles.container}>
         <View style={{flexDirection: 'row', alignSelf: 'center', marginBottom: 10}}>
-          <Text style={{color: '#b6b6b6'}}>
+          <Text style={{color: colors.text}}>
           Points Total:
           </Text>
           <TextInput style={styles.pointsInput} placeholder={points.toString()} keyboardType={'numeric'} maxLength={2} onChangeText={(value) => actions.setPoints(+value)} />
-          <Text style={{color: '#b6b6b6'}}>
+          <Text style={{color: colors.text}}>
           Points Left:
           </Text>
-          <Text style={{color: '#b6b6b6'}}>
+          <Text style={{color: colors.text}}>
           {points - pointsUsed}
           </Text>
         </View>
         {view}
         <View style={{flexDirection: 'row', marginTop: 15 }}>
-          <TouchableOpacity style={styles.confirmBtn}>
+          <TouchableOpacity style={styles.confirmBtn} onPress={() =>  {
+                  Actions.selectSkill()
+                  actions.changeView('Skills')
+                }}>
               {confirm}
           </TouchableOpacity>
           <TouchableOpacity style={styles.resetBtn} onPress={this.resetStat.bind(this)}>
@@ -115,7 +123,7 @@ let styles = StyleSheet.create({
     alignItems: 'flex-start',
     fontSize: 30,
     marginLeft: 5,
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   confirmBtn: {
@@ -149,13 +157,13 @@ let styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     alignItems: 'center',
-    color: '#b6b6b6'
+    color: colors.text
 
   },
   mod: {
     flex: 1,
     alignItems: 'flex-end',
-    color: '#b6b6b6'
+    color: colors.text
 
   }, 
   resetBtn: {
@@ -169,7 +177,7 @@ let styles = StyleSheet.create({
     backgroundColor: 'red',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
 
   },
@@ -179,9 +187,10 @@ let styles = StyleSheet.create({
     backgroundColor: 'green',
     textAlign: 'center',
     borderRadius: 10,
-    color: '#b6b6b6',
+    color: colors.text,
     borderColor: '#5A575A'
 
 
   }
+
 })
